@@ -2,20 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { Table, Button, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-// import { FilterValue } from "antd/lib/table/interface";
 import {
   FilterValue,
   TablePaginationConfig,
   SorterResult,
-  // TableCurrentDataSource,
 } from "antd/lib/table/interface";
 
-// interface Record {
-//   key: string;
-//   city_name: string;
-//   country_name: string;
-//   timezone: string;
-// }
 interface CityRecord {
   key: string;
   city_name: string;
@@ -35,13 +27,6 @@ interface CityData {
   total_records: number;
 }
 
-// type SortOrder = "ascend" | "descend" | undefined;
-
-// interface SortedInfo {
-//   columnKey?: string;
-//   order?: SortOrder;
-// }
-////
 type SortOrder = "ascend" | "descend";
 
 interface SortedInfo {
@@ -96,31 +81,6 @@ const CitiesTable: React.FC = () => {
       const response = await fetch(
         `https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&start=${counter}&rows=10&q=${searchText}`
       );
-      // const data: CityData = await response.json();
-      // const newCities: Record[] =
-      //   data?.records?.map((record) => ({
-      //     key: record.recordid,
-      //     city_name: record.fields.name,
-      //     country_name: record.fields.cou_name_en,
-      //     timezone: record.fields.timezone,
-      //   })) ?? [];
-
-      // const data: CityData = await response.json();
-      // console.log(data);
-      // const newCities: Record[] =
-      //   data?.records?.map((record) => {
-      //     const city: Record = {
-      //       key: generateUniqueKey({
-      //         city_name: record.fields.name,
-      //         country_name: record.fields.cou_name_en,
-      //         timezone: record.fields.timezone,
-      //       }),
-      //       city_name: record.fields.name,
-      //       country_name: record.fields.cou_name_en,
-      //       timezone: record.fields.timezone,
-      //     };
-      //     return city;
-      //   }) ?? [];
 
       const data: CityData = await response.json();
       // const newCities: Record[] =
@@ -144,8 +104,6 @@ const CitiesTable: React.FC = () => {
       if (counter === 0) {
         setCities(uniqueNewCities);
       } else {
-        // setCities((prevCities) => [...prevCities, ...newCities]);
-
         setCities((prevCities) => [...prevCities, ...uniqueNewCities]);
       }
       setCounter((prevCounter) => prevCounter + uniqueNewCities.length);
@@ -180,12 +138,6 @@ const CitiesTable: React.FC = () => {
   };
 
   const handleTableChange = (
-    // _pagination: any,
-    // _filters: any,
-    // sorter: { columnKey?: string; order?: SortOrder }
-    // _pagination: { current: number; pageSize: number },
-    // _filters: Record<string, FilterValue | null>,
-    // sorter: { columnKey?: string; order?: SortOrder }
     _pagination: TablePaginationConfig,
     _filters: Record<string, FilterValue | null>,
     // sorter: SorterResult<CityRecord>
@@ -200,25 +152,6 @@ const CitiesTable: React.FC = () => {
       columnKey: sorter.columnKey?.toString(),
       order: sorter.order as SortOrder | null | undefined,
     });
-    // setSortedInfo(sorter);
-    // Sort data in memory based on sorter info
-    // const sortedCities = [...cities].sort((a, b) => {
-    //   const key = sorter.columnKey || "";
-    //   switch (key) {
-    //     case "city_name":
-    //     case "country_name":
-    //     case "timezone":
-    //       if (sorter.order === "ascend") {
-    //         return a[key].localeCompare(b[key]);
-    //       } else if (sorter.order === "descend") {
-    //         return b[key].localeCompare(a[key]);
-    //       }
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    //   return 0;
-    // });
 
     const sortedCities = [...cities].sort((a, b) => {
       // const key = sorter.columnKey || "";
@@ -287,13 +220,6 @@ const CitiesTable: React.FC = () => {
         style={{ maxHeight: "calc(100vh - 64px)", overflowY: "auto" }}
         onScroll={handleScroll}
       >
-        {/* <Table
-          dataSource={cities}
-          columns={columns}
-          loading={loading}
-          pagination={false}
-          onChange={handleTableChange}
-        /> */}
         <Table
           dataSource={cities}
           columns={columns}
