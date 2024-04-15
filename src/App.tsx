@@ -2,9 +2,21 @@ import React, { useState, useEffect, useRef } from "react";
 import { Table, Button, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { FilterValue } from "antd/lib/table/interface";
+// import { FilterValue } from "antd/lib/table/interface";
+import {
+  FilterValue,
+  TablePaginationConfig,
+  SorterResult,
+  // TableCurrentDataSource,
+} from "antd/lib/table/interface";
 
-interface Record {
+// interface Record {
+//   key: string;
+//   city_name: string;
+//   country_name: string;
+//   timezone: string;
+// }
+interface CityRecord {
   key: string;
   city_name: string;
   country_name: string;
@@ -39,7 +51,8 @@ interface SortedInfo {
 ////
 
 const CitiesTable: React.FC = () => {
-  const [cities, setCities] = useState<Record[]>([]);
+  // const [cities, setCities] = useState<Record[]>([]);
+  const [cities, setCities] = useState<CityRecord[]>([]);
   const [searchText, setSearchText] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [loadMore, setLoadMore] = useState<boolean>(true);
@@ -70,7 +83,7 @@ const CitiesTable: React.FC = () => {
     const uniqueKey = `${cityData.city_name}-${cityData.country_name}-${
       cityData.timezone
     }-${uniqueCounter++}`;
-    console.log("Generated unique key:", uniqueKey); // Log the generated unique key
+    // console.log("Generated unique key:", uniqueKey); // Log the generated unique key
     return uniqueKey;
   };
   /////
@@ -110,7 +123,8 @@ const CitiesTable: React.FC = () => {
       //   }) ?? [];
 
       const data: CityData = await response.json();
-      const newCities: Record[] =
+      // const newCities: Record[] =
+      const newCities: CityRecord[] =
         data?.records?.map((record) => ({
           key: generateUniqueKey({
             city_name: record.fields.name,
@@ -169,11 +183,24 @@ const CitiesTable: React.FC = () => {
     // _pagination: any,
     // _filters: any,
     // sorter: { columnKey?: string; order?: SortOrder }
-    _pagination: { current: number; pageSize: number },
+    // _pagination: { current: number; pageSize: number },
+    // _filters: Record<string, FilterValue | null>,
+    // sorter: { columnKey?: string; order?: SortOrder }
+    _pagination: TablePaginationConfig,
     _filters: Record<string, FilterValue | null>,
-    sorter: { columnKey?: string; order?: SortOrder }
+    // sorter: SorterResult<CityRecord>
+    sorter: SorterResult<CityRecord> | SorterResult<CityRecord>[]
   ) => {
-    setSortedInfo(sorter);
+    if (Array.isArray(sorter)) {
+      // Handle multiple sorters by taking the first one
+      sorter = sorter[0];
+    }
+
+    setSortedInfo({
+      columnKey: sorter.columnKey?.toString(),
+      order: sorter.order as SortOrder | null | undefined,
+    });
+    // setSortedInfo(sorter);
     // Sort data in memory based on sorter info
     // const sortedCities = [...cities].sort((a, b) => {
     //   const key = sorter.columnKey || "";
@@ -194,7 +221,8 @@ const CitiesTable: React.FC = () => {
     // });
 
     const sortedCities = [...cities].sort((a, b) => {
-      const key = sorter.columnKey || "";
+      // const key = sorter.columnKey || "";
+      const key = sorter.columnKey?.toString() || "";
       switch (key) {
         case "city_name":
         case "country_name":
