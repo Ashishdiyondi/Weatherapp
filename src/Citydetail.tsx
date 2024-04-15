@@ -27,7 +27,7 @@ const CityDetail = () => {
     const fetchGeoData = async () => {
       try {
         const response = await fetch(
-          `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${geoApiKey}`
+          `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${geoApiKey}`
         );
         const data = await response.json();
         if (data && data.length > 0) {
@@ -163,7 +163,7 @@ const CityDetail = () => {
             <p>
               <img
                 className="image"
-                src={`http://openweathermap.org/img/wn/${icon}.png`}
+                src={`https://openweathermap.org/img/wn/${icon}.png`}
                 alt={description}
               />
             </p>
