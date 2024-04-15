@@ -1,0 +1,241 @@
+/*:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+   line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; 
+}*/
+/*
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+/* .main {
+  height: 100vh;
+  background-color: #535bf2;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+} */
+
+.input {
+  text-align: center;
+  margin-top: -20px;
+}
+h1 {
+  color: #2626ff;
+}
+.error {
+  color: #ff1919;
+  text-align: center;
+  font-weight: bold;
+}
+.loading {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+.main2 {
+  background-color: #ffa6a6;
+  /* height: 100%; */
+  margin: 15px auto;
+  border-radius: 6px;
+  /* margin-top: 350px;
+  margin-bottom: 400px; */
+  padding: 20px;
+  width: 330px;
+  /* height: %; */
+}
+/* weather condition */
+.main2.clear-sky {
+  background: rgb(51, 184, 217);
+  background: linear-gradient(
+    180deg,
+    rgba(51, 184, 217, 1) 22%,
+    rgba(158, 221, 237, 1) 90%
+  );
+}
+
+.main2.cloudy {
+  background: rgb(147, 147, 147);
+  background: linear-gradient(
+    180deg,
+    rgba(147, 147, 147, 1) 20%,
+    rgba(185, 185, 185, 1) 95%
+  );
+}
+
+.main2.rain {
+  background: rgb(0, 0, 128);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 128, 1) 16%,
+    rgba(0, 0, 159, 1) 49%,
+    rgba(0, 0, 212, 1) 76%
+  );
+}
+.main2.thunderstorm {
+  background: rgb(122, 27, 167);
+  background: linear-gradient(
+    180deg,
+    rgba(122, 27, 167, 1) 25%,
+    rgba(172, 107, 204, 1) 92%
+  );
+}
+.main2.snow {
+  background: rgb(104, 177, 168);
+  background: linear-gradient(
+    180deg,
+    rgba(104, 177, 168, 1) 26%,
+    rgba(182, 229, 224, 1) 100%
+  );
+}
+.main2.atmosphere {
+  background: rgb(152, 146, 116);
+  background: linear-gradient(
+    180deg,
+    rgba(152, 146, 116, 1) 22%,
+    rgba(185, 180, 160, 1) 88%
+  );
+}
+.main2.drizzle {
+  background: rgb(12, 199, 161);
+  background: linear-gradient(
+    180deg,
+    rgba(12, 199, 161, 1) 29%,
+    rgba(159, 253, 233, 1) 100%
+  );
+}
+
+.cityname {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+}
+.city {
+  color: white;
+  font-size: 30px;
+}
+.image {
+  /* background-color: pink; */
+  width: 70px;
+  height: 70px;
+}
+.temp {
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.desc {
+  color: white;
+  /* font-size: 15px; */
+}
+
+.description {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  /* margin-bottom: 0px; */
+  /* margin-top: 20px; Optional: margin to separate it from the previous div */
+  font-family: "Arial", sans-serif; /* Change font family */
+  font-size: 16px; /* Change font size */
+  line-height: 1; /* Increase line height for better readability */
+}
+
+.entry {
+  display: flex;
+  justify-content: space-between; /* Distribute space evenly between children */
+  align-items: center; /* Center align items vertically */
+  margin-bottom: 15px; /* Add margin to bottom of each entry */
+}
+
+.label {
+  color: white;
+}
+.i {
+  font-weight: bold;
+  color: white;
+}
+
+.entry p {
+  margin: 0; /* Remove default margin */
+}
+
+.entry + .entry {
+  border-top: 1px solid rgba(255, 255, 255, 0.2); /* Transparent line color */
+  padding-top: 15px; /* Space above the line */
+}
+
+.footer {
+  /* background-color: #2626ff; */
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #0f363b;
+}
